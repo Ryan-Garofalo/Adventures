@@ -11,13 +11,8 @@ body{
   margin-bottom: 25px;
 }
 img{
-  height:100px;
-  width:150px;
-}
-.author{
-  display: inline-block;
-  margin-left: 500px;
-  float:right;
+  height:200px;
+  width:auto;
 }
 .green{
   color:green;
@@ -49,6 +44,7 @@ img{
 }
 .inLine{
   display:inline-block;
+  font-family: 'Exo 2', sans-serif;
 }
 .imageCont{
   height:100px;
@@ -62,12 +58,11 @@ img{
 }
 .panel-body{
   background-color: #F8F8F8;
-  border: blue;
   border-style:solid;
   border-width: 2px;
 }
 .panel.panel-default{
-  background-color: blue;
+  background-color: white;
   margin-right: 50px;
 }
 #title{
@@ -75,6 +70,44 @@ img{
   font-size: 40px;
   color:blue;
 }
+
+.font2{
+  font-family: 'Exo 2', sans-serif;
+}
 .font{
   font-family: 'Bungee Inline', cursive;
+}
+.flex-container {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-around;
+    align-items: center;
+}
+.author{
+  font-family: 'Exo 2', sans-serif;
+  margin-bottom: 100px;
+  top:0;
+
+}
+.postTitle{
+  font-size: 15px;
+}
+.middle{
+  width: 700px;
+}
+.bold{
+  font-weight: 900;
+}
+.space{
+  margin-left: 20px;
+}
+.buttonSpace{
+  margin-top: 10px;
+}
+.imgCont{
+  height: 200px;
+  width: 250px;
+  overflow: hidden;
 }

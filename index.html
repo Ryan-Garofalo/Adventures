@@ -12,14 +12,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.js" charset="utf-8"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
   <script src="script.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Exo+2" rel="stylesheet">
   <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
   <div class = "main" ng-controller="mainController">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
@@ -29,8 +28,6 @@
           </button>
           <a class="navbar-brand" id="title" href="#">Adventures</a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
 
@@ -48,8 +45,8 @@
             <option value="votes">Votes</option>
           </select>
           </div>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        </div>
+      </div>
     </nav>
     <div class="formContainer" ng-show="show">
       <form role="form" name="formy">
@@ -100,46 +97,45 @@
                    required>
           </div>
             <input type="submit" value="Click me!" ng-click="formy.$valid && addPost()" >
-          <!-- <button type="submit" class="btn btn-default" ng-click="addPost()">Submit</button> -->
       </form>
     </div>
     <ul ng-repeat="post in view.posts |orderBy:sort |filter:searchBox">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="imageCont">
+        <div class="panel-body panel panel-default flex-container">
+          <div class="imgCont">
             <img ng-src='{{post.image}}'>
           </div>
-          <div class="block">
-            <p class="inLine">{{post.title}} ||<p ng-click="post.votes=post.votes+1" class="glyphicon glyphicon-arrow-up"></p>
+          <div class="font2 middle">
+            <p class="inLine font postTitle">{{post.title}} ||<p ng-click="post.votes=post.votes+1" class="glyphicon glyphicon-arrow-up"></p>
             <p ng-click="post.votes=post.votes-1" class="glyphicon glyphicon-arrow-down"></p>
             <p ng-class="{green:post.votes>0,red:post.votes<0}" class="inLine">{{post.votes}}</p>
-            <p class="author">By {{post.author}}</p>
             <p>{{post.description}}</p>
-          <div class="inLine">
-            <p class="inLine"><span class="glyphicon glyphicon-calendar">{{post.date}} | </p>
-            <p class="inLine" ng-click="showComments(post)"><span class="glyphicon glyphicon-comment"> {{post.comments.length}} comments | </p>
-            <p class="inLine"><span class="glyphicon glyphicon-pencil" ng-click="showCommentForm(post)"> Add Comment</p>
-            <div class="comments" ng-show="post.commentsShow">
-              <ul ng-repeat="comment in post.comments">
-                <label>Author: </label>
-                <p class="inLine">{{comment.author}}</p>
-                <label>comment: </label>
-                <p class="inLine">{{comment.comment}}</p>
-              </ul>
+            <div class="inLine">
+              <p class="inLine"><span class="glyphicon glyphicon-calendar"></span> {{post.date}} | </p>
+              <p class="inLine" ng-click="showComments(post)"><span class="glyphicon glyphicon-comment"> </span>   {{post.comments.length}} comments | </p>
+              <p class="inLine"  ng-click="showCommentForm(post)"><span class="glyphicon glyphicon-pencil"></span> Add Comment</p>
+                <div class="comments" ng-show="post.commentsShow">
+                  <ul ng-repeat="comment in post.comments">
+                    <label class="bold">Author: </label>
+                    <p class="inLine">{{comment.author}}</p>
+                    <label class="bold space">Comment: </label>
+                    <p class="inLine">{{comment.comment}}</p>
+                  </ul>
+                </div>
+                <div class="commentForm" class="inLine" ng-show="post.commentForm">
+                  <form role="form">
+                    <label for="author" name="author">Author</label>
+                    <input type="text" class="form-control"ng-model="newComment.author">
+                    <label for="comment" name="comment" >comment</label>
+                    <input type="text" class="form-control" ng-model="newComment.comment">
+                    <button type="submit" class="btn btn-default buttonSpace" ng-click="addComment(post)">Add Comment</button>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div class="commentForm" class="inLine" ng-show="post.commentForm">
-              <form role="form">
-                <label for="author" name="author">Author</label>
-                <input type="text" class="form-control"ng-model="newComment.author">
-                <label for="comment" name="comment" >comment</label>
-                <input type="text" class="form-control" ng-model="newComment.comment">
-                <button type="submit" class="btn btn-default" ng-click="addComment(post)">Add Comment</button>
-              </form>
-            </div>
+            <div>
+              <p class="author">By {{post.author}}</p>
             </div>
         </div>
-      </div>
-  </ul>
-</div>
-</body>
+      </ul>
+  </body>
 </html>
