@@ -1,0 +1,80 @@
+body{
+  background-image: url("images/Moraine_Lake.jpg");
+  background-size: cover;
+}
+.block{
+  display: inline-block;
+}
+.formContainer{
+  width: 80vw;
+  margin-left: 100px;
+  margin-bottom: 25px;
+}
+img{
+  height:100px;
+  width:150px;
+}
+.author{
+  display: inline-block;
+  margin-left: 500px;
+  float:right;
+}
+.green{
+  color:green;
+}
+.red{
+  color:red;
+}
+.dropdown-toggle{
+  margin-right: 55vw;
+}
+.dropdown-menu{
+  margin-right: 55vw;
+}
+.ng-enter{
+    transition: 0.5s ease all;
+    opacity: 0;
+}
+.ng-enter.ng-enter-active{
+    opacity: 1;
+}
+
+.ng-leave{
+    transition: 0.5s ease all;
+    opacity: 1;
+}
+
+.ng-leave.ng-leave-active{
+    opacity: 0;
+}
+.inLine{
+  display:inline-block;
+}
+.imageCont{
+  height:100px;
+  width:150px;
+  display:inline-block;
+  vertical-align: middle;
+}
+.selectIn{
+  display: inline-block;
+  margin-top: 15px;
+}
+.panel-body{
+  background-color: #F8F8F8;
+  border: blue;
+  border-style:solid;
+  border-width: 2px;
+}
+.panel.panel-default{
+  background-color: blue;
+  margin-right: 50px;
+}
+#title{
+  font-family: 'Bungee Inline', cursive;
+  font-size: 40px;
+  color:blue;
+}
+.font{
+  font-family: 'Bungee Inline', cursive;
+}

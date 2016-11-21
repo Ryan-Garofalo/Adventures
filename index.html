@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="main">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.js" charset="utf-8"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+  <script src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+  <div class = "main" ng-controller="mainController">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" id="title" href="#">Adventures</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+            <li class="font"><a href="#" ng-click="showForm()"><span class="glyphicon glyphicon-plus"></span>submit Post</a></li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" ng-model="searchBox">
+            </div>
+          </form>
+          <div class="selectIn">
+          <select ng-model="sort">
+            <option value="date">Date</option>
+            <option value="comments">Comments</option>
+            <option value="votes">Votes</option>
+          </select>
+          </div>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div class="formContainer" ng-show="show">
+      <form role="form" name="formy">
+          <div class="form-group">
+            <label for="Title">Title</label>
+            <input type="text"
+                   name="title"
+                   class="form-control"
+                   id="email"
+                   placeholder="Title"
+                   required ng-minlength=3
+                   ng-maxlength=12
+                   ng-model="newPost.title" required>
+                   <div ng-messages="formy.title.$error" ng-show="formy.title.$touched">
+                     <p ng-message="minlength">Your name is too short.</p>
+                     <p ng-message="maxlength">Your name is too long.</p>
+                     <p ng-message="required">Your name is required.</p>
+                  </div>
+          </div>
+          <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text"
+                   name="author"
+                   class="form-control"
+                   id="email"
+                   placeholder="Author"
+                   ng-model="newPost.author"
+                   required>
+          </div>
+          <div class="form-group">
+            <label for="image">Image URL</label>
+            <input type="text"
+                   name="image"
+                   class="form-control"
+                   id="email"
+                   placeholder="Image Url"
+                   ng-model="newPost.image"
+                   required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text"
+                   name=""
+                   description class="form-control"
+                   id="pwd"
+                   placeholder="Description"
+                   ng-model="newPost.description"
+                   required>
+          </div>
+            <input type="submit" value="Click me!" ng-click="formy.$valid && addPost()" >
+          <!-- <button type="submit" class="btn btn-default" ng-click="addPost()">Submit</button> -->
+      </form>
+    </div>
+    <ul ng-repeat="post in view.posts |orderBy:sort |filter:searchBox">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="imageCont">
+            <img ng-src='{{post.image}}'>
+          </div>
+          <div class="block">
+            <p class="inLine">{{post.title}} ||<p ng-click="post.votes=post.votes+1" class="glyphicon glyphicon-arrow-up"></p>
+            <p ng-click="post.votes=post.votes-1" class="glyphicon glyphicon-arrow-down"></p>
+            <p ng-class="{green:post.votes>0,red:post.votes<0}" class="inLine">{{post.votes}}</p>
+            <p class="author">By {{post.author}}</p>
+            <p>{{post.description}}</p>
+          <div class="inLine">
+            <p class="inLine"><span class="glyphicon glyphicon-calendar">{{post.date}} | </p>
+            <p class="inLine" ng-click="showComments(post)"><span class="glyphicon glyphicon-comment"> {{post.comments.length}} comments | </p>
+            <p class="inLine"><span class="glyphicon glyphicon-pencil" ng-click="showCommentForm(post)"> Add Comment</p>
+            <div class="comments" ng-show="post.commentsShow">
+              <ul ng-repeat="comment in post.comments">
+                <label>Author: </label>
+                <p class="inLine">{{comment.author}}</p>
+                <label>comment: </label>
+                <p class="inLine">{{comment.comment}}</p>
+              </ul>
+            </div>
+            <div class="commentForm" class="inLine" ng-show="post.commentForm">
+              <form role="form">
+                <label for="author" name="author">Author</label>
+                <input type="text" class="form-control"ng-model="newComment.author">
+                <label for="comment" name="comment" >comment</label>
+                <input type="text" class="form-control" ng-model="newComment.comment">
+                <button type="submit" class="btn btn-default" ng-click="addComment(post)">Add Comment</button>
+              </form>
+            </div>
+            </div>
+        </div>
+      </div>
+  </ul>
+</div>
+</body>
+</html>
